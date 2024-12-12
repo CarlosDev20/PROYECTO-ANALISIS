@@ -1,0 +1,8 @@
+model\Administrador.class
+model\Pago.class
+model\Servicio.class
+model\Cliente.class
+db\CConexion.class
+model\Usuario.class
+model\Conductor.class
+model\Vehiculo.class
