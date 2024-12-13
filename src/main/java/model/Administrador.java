@@ -1,40 +1,19 @@
 package model;
 
-public class Administrador {
+public class Administrador extends Rol {
 
-    private int id;
-    private String usuario;
-    private String contrasena;
-
-    // Constructor
-    public Administrador(int id, String usuario, String contrasena) {
-        this.id = id;
-        this.usuario = usuario;
-        this.contrasena = contrasena;
+    public Administrador(int id, String nombre, String correo, String contrasena) {
+        super(id, nombre, correo, contrasena);
     }
 
-    // Getters y Setters
-    public int getId() {
-        return id;
+    @Override
+    public boolean iniciarSesion() {
+        // Aquí colocarías la lógica específica para el inicio de sesión de un Administrador.
+        // Por ejemplo, validar la contraseña consultando el repositorio de usuarios.
+        return true;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void administrarUsuario() {
+        // Lógica para administrar usuarios (ej: resetear contraseñas, cambiar roles, etc.)
     }
 }

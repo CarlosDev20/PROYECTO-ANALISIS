@@ -1,20 +1,25 @@
 package model;
 
-public class Usuario {
+public abstract class Rol {
+
     private int id;
+    private String nombre;
     private String correo;
     private String contrasena;
-    private String rol; // "administrador", "conductor", etc.
 
-    public Usuario(int id, String correo, String contrasena, String rol) {
+    public Rol(int id, String nombre, String correo, String contrasena) {
         this.id = id;
+        this.nombre = nombre;
         this.correo = correo;
         this.contrasena = contrasena;
-        this.rol = rol;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public String getCorreo() {
@@ -25,11 +30,5 @@ public class Usuario {
         return contrasena;
     }
 
-    public String getRol() {
-        return rol;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
+    public abstract boolean iniciarSesion();
 }

@@ -1,12 +1,9 @@
-
 package view;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import repository.UsuarioRepositorio;
+import repository.UsuarioRepositorioMySql;
+import service.UsuarioService;
 
 public class InicioSesion extends javax.swing.JFrame {
 
@@ -25,7 +22,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         txtContrase = new javax.swing.JPasswordField();
-        btnIngresar = new javax.swing.JButton();
+        javax.swing.JButton btnIngresar = new javax.swing.JButton();
         txtRol = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
 
@@ -128,55 +125,44 @@ public class InicioSesion extends javax.swing.JFrame {
         String correo = txtCorreo.getText();
         String contra = new String(txtContrase.getPassword());
         String rol = txtRol.getSelectedItem().toString();
+
+        if (correo.isEmpty() || contra.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+        }
+
+        UsuarioRepositorio repositorio = new UsuarioRepositorioMySql();
+        UsuarioService servicio = new UsuarioService(repositorio);
         
-        if(validar(correo, contra, rol)){
-            JOptionPane.showMessageDialog(null, "Bienvenido como " +rol);
-            
+        boolean autenticado = servicio.autenticar(correo, contra, rol);
+
+        if (autenticado) {
+            JOptionPane.showMessageDialog(this, "Bienvenido como " + rol);
+
+            // Redirigir según el rol
             switch (rol) {
-            case "Cliente":
-                new VentanaCliente().setVisible(true);
-                break;
-            case "Conductor":
-                new VentanaConductor().setVisible(true);
-                break;
-            case "Administrador":
-                new VentanaAdministrador().setVisible(true);
-                break;
+                case "Cliente":
+                    new VentanaCliente().setVisible(true);
+                    break;
+                case "Conductor":
+                    new VentanaConductor().setVisible(true);
+                    break;
+                case "Administrador":
+                    new VentanaAdministrador().setVisible(true);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Rol no reconocido.");
+                    break;
+            }
+
+            // Cerrar la ventana actual
+            this.dispose();
+        } else {
+            // Credenciales incorrectas
+            JOptionPane.showMessageDialog(this, "Credenciales incorrectas. Intente nuevamente.");
         }
-        }else{
-            JOptionPane.showMessageDialog(null, "Credenciales no validas");
-        }
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
-    private boolean validar(String correo, String contra, String rol) {
-        boolean estado = false;
-        String JDBC_URL = "jdbc:mysql://localhost:3306/analisis?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-        String JDBC_USER = "root";
-        String JDBC_PASSWORD = "admin";
-
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
-            String sql = "SELECT contrasena, rol FROM usuarios WHERE correo = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, correo);
-                ResultSet resultSet = statement.executeQuery();
-
-                if (resultSet.next()) {
-                    String storedPassword = resultSet.getString("contrasena");
-                    String storedRol = resultSet.getString("rol");
-                    
-                    if (storedPassword.equals(contra) && storedRol.equals(rol)) {
-                        estado = true;
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return estado;
-    }
-
-    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -186,7 +172,6 @@ public class InicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

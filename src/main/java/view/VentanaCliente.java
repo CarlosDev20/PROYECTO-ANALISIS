@@ -10,7 +10,7 @@ public class VentanaCliente extends javax.swing.JFrame {
     
     public VentanaCliente() {
         initComponents();
-        cliente = new ClienteController();
+        //cliente = new ClienteController();
     }
 
     @SuppressWarnings("unchecked")
@@ -201,7 +201,7 @@ public class VentanaCliente extends javax.swing.JFrame {
                 new String (txtContra.getPassword())
         );
         
-        cliente.registrarCliente(c);
+        //cliente.registrarCliente(c);
         JOptionPane.showMessageDialog(this, "Cliente registrado exitosamente.");
         
     }
@@ -209,19 +209,19 @@ public class VentanaCliente extends javax.swing.JFrame {
     public void buscarCliente() {
         try {
             int id = Integer.parseInt(txtDni.getText()); // Suponemos que el ID del cliente está en el campo "DNI"
-            Cliente c = cliente.buscarCliente(id); // Llamada al método del controlador
+            //Cliente c = cliente.buscarCliente(id); // Llamada al método del controlador
 
-            if (c != null) {
-                // Mostrar datos en los campos
-                txtNombre.setText(c.getNombre());
-                txtApellido.setText(c.getApellido());
-                txtCorreo.setText(c.getCorreo());
-                txtTelefono.setText(c.getTelefono());
-                txtContra.setText(c.getContrasena());
-                JOptionPane.showMessageDialog(this, "Cliente encontrado.");
-            } else {
-                JOptionPane.showMessageDialog(this, "No se encontró un cliente con el ID especificado.");
-            }
+//            if (c != null) {
+//                // Mostrar datos en los campos
+//                txtNombre.setText(c.getNombre());
+//                txtApellido.setText(c.getApellido());
+//                txtCorreo.setText(c.getCorreo());
+//                txtTelefono.setText(c.getTelefono());
+//                txtContra.setText(c.getContrasena());
+//                JOptionPane.showMessageDialog(this, "Cliente encontrado.");
+//            } else {
+//                JOptionPane.showMessageDialog(this, "No se encontró un cliente con el ID especificado.");
+//            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
         } catch (Exception ex) {
