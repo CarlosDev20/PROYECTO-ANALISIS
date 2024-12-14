@@ -1,7 +1,5 @@
 package controller;
 
-import db.CConexion;
-import java.sql.*;
 import model.Cliente;
 import service.ClienteService;
 
@@ -15,20 +13,17 @@ public class ClienteController {
 
     public void registrarCliente(Cliente cliente) {
         clienteService.registrarCliente(cliente);
-        //System.out.println("Cliente registrado exitosamente.");
     }
 
-    public Cliente buscarCliente(int id) {
-        return clienteService.buscarCliente(id);
+    public Cliente buscarClientePorDni(String dni) {
+        return clienteService.buscarClientePorDni(dni);
     }
 
-    public void modificarCliente(int id, Cliente cliente) {
-        clienteService.modificarCliente(id, cliente);
-        //System.out.println("Cliente actualizado exitosamente.");
+    public void modificarCliente(String dni, Cliente cliente) {
+        clienteService.modificarCliente(dni, cliente);
     }
 
-    public void eliminarCliente(int id) {
-        clienteService.eliminarCliente(id);
-        //System.out.println("Cliente eliminado exitosamente.");
+    public void eliminarCliente(String dni) {
+        clienteService.eliminarCliente(dni);
     }
 }

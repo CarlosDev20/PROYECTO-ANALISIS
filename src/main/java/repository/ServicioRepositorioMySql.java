@@ -81,30 +81,4 @@ public class ServicioRepositorioMySql implements ServicioRepositorio{
             e.printStackTrace();
         }
     }
-
-//    @Override
-//    public List<Servicio> listarServicios() {
-//        List<Servicio> lista = new ArrayList<>();
-//        String query = "SELECT * FROM servicios";
-//        try (Connection con = CConexion.getConnection(); PreparedStatement ps = con.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
-//            while (rs.next()) {
-//                // Similarmente, aquí deberías obtener Cliente y Vehiculo
-//                Cliente c = new Cliente(rs.getInt("cliente_id"), "dniX", "nombreX", "apellidoX", "correoX", "telefonoX", "contrasenaX");
-//                Vehiculo v = new Vehiculo(rs.getInt("vehiculo_id"), "ABC123", "ModeloX", 1000, true);
-//
-//                Servicio s = new Servicio(
-//                        rs.getInt("id"),
-//                        c,
-//                        v,
-//                        rs.getString("mecanico"),
-//                        rs.getDate("fecha_inicio"),
-//                        rs.getDate("fecha_fin")
-//                );
-//                lista.add(s);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return lista;
-//    }
 }

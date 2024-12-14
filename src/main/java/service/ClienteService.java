@@ -12,22 +12,34 @@ public class ClienteService {
     }
 
     public void registrarCliente(Cliente cliente) {
-        // Aquí podrías agregar validaciones de negocio, por ejemplo:
-        // - Verificar si el DNI es válido
-        // - Verificar si el correo no existe ya en la base de datos, etc.
+        if (clienteRepositorio.buscarPorDni(cliente.getDni()) != null) {
+            throw new IllegalArgumentException("El cliente con DNI " + cliente.getDni() + " ya existe.");
+        }
         clienteRepositorio.guardarCliente(cliente);
     }
 
-    public Cliente buscarCliente(int id) {
-        return clienteRepositorio.buscarPorId(id);
+
+    public Cliente buscarClientePorDni(String dni) {
+        Cliente cliente = clienteRepositorio.buscarPorDni(dni);
+        if (cliente == null) {
+            throw new IllegalArgumentException("No se encontró un cliente con el DNI especificado.");
+        }
+        return cliente;
     }
 
-    public void modificarCliente(int id, Cliente cliente) {
-        // Lógica adicional si fuera necesario
-        clienteRepositorio.modificarCliente(id, cliente);
+    public void modificarCliente(String dni, Cliente cliente) {
+        Cliente clienteExistente = clienteRepositorio.buscarPorDni(dni);
+        if (clienteExistente == null) {
+            throw new IllegalArgumentException("No se puede modificar. Cliente con DNI " + dni + " no encontrado.");
+        }
+        clienteRepositorio.modificarCliente(dni, cliente);
     }
 
-    public void eliminarCliente(int id) {
-        clienteRepositorio.eliminarCliente(id);
+    public void eliminarCliente(String dni) {
+        Cliente clienteExistente = clienteRepositorio.buscarPorDni(dni);
+        if (clienteExistente == null) {
+            throw new IllegalArgumentException("No se puede eliminar. Cliente con DNI" + dni + " no encontrado.");
+        }
+        clienteRepositorio.eliminarCliente(dni);
     }
 }

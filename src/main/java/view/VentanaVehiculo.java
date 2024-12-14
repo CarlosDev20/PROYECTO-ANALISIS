@@ -15,6 +15,7 @@ public class VentanaVehiculo extends javax.swing.JFrame {
      */
     public VentanaVehiculo() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

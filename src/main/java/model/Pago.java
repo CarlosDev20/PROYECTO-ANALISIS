@@ -4,18 +4,16 @@ public class Pago {
 
     private int id;
     private double monto;
-    private String metodo;
-    private boolean confirmado;
+    private String metodoPago;
+    private Servicio servicio;
 
-    // Constructor
-    public Pago(int id, double monto, String metodo, boolean confirmado) {
+    public Pago(int id, double monto, String metodoPago, Servicio servicio) {
         this.id = id;
         this.monto = monto;
-        this.metodo = metodo;
-        this.confirmado = confirmado;
+        this.metodoPago = metodoPago;
+        this.servicio = servicio;
     }
 
-    // Getters y Setters
     public int getId() {
         return id;
     }
@@ -32,19 +30,20 @@ public class Pago {
         this.monto = monto;
     }
 
-    public String getMetodo() {
-        return metodo;
+    public String getMetodoPago() {
+        return metodoPago;
     }
 
-    public void setMetodo(String metodo) {
-        this.metodo = metodo;
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
     }
 
-    public boolean isConfirmado() {
-        return confirmado;
+    public Servicio getServicio() {
+        return servicio;
     }
 
-    public void setConfirmado(boolean confirmado) {
-        this.confirmado = confirmado;
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
     }
+
 }

@@ -1,8 +1,16 @@
 package view;
 
+import controller.ClienteController;
+import controller.ConductorController;
 import javax.swing.JOptionPane;
+import repository.ClienteRepositorio;
+import repository.ClienteRepositorioMySql;
+import repository.ConductorRepositorio;
+import repository.ConductorRepositorioMySql;
 import repository.UsuarioRepositorio;
 import repository.UsuarioRepositorioMySql;
+import service.ClienteService;
+import service.ConductorService;
 import service.UsuarioService;
 
 public class InicioSesion extends javax.swing.JFrame {
@@ -141,14 +149,28 @@ public class InicioSesion extends javax.swing.JFrame {
             // Redirigir según el rol
             switch (rol) {
                 case "Cliente":
-                    new VentanaCliente().setVisible(true);
+
+                    ClienteRepositorio clienteRepositorio;
+                    clienteRepositorio = new ClienteRepositorioMySql();
+                    ClienteService clienteService = new ClienteService(clienteRepositorio);
+                    ClienteController clienteController = new ClienteController(clienteService);
+                    new VentanaCliente(clienteController).setVisible(true);
                     break;
+                    
                 case "Conductor":
-                    new VentanaConductor().setVisible(true);
+                    ConductorRepositorio conductorRepositorio = new ConductorRepositorioMySql();
+                    ConductorService conductorService = new ConductorService(conductorRepositorio);
+                    ConductorController conductorController = new ConductorController(conductorService);
+                    new VentanaConductor(conductorController).setVisible(true);
                     break;
-                case "Administrador":
-                    new VentanaAdministrador().setVisible(true);
-                    break;
+                    
+//                case "Administrador":
+//                    UsuarioRepositorio usuarioRepositorio = new UsuarioRepositorioMySql();
+//                    UsuarioService usuarioService = new UsuarioService(usuarioRepositorio);
+//                    UsuarioController usuarioController = new UsuarioController(usuarioService);
+//
+//                    new VentanaAdministrador(usuarioController).setVisible(true);
+//                    break;
                 default:
                     JOptionPane.showMessageDialog(this, "Rol no reconocido.");
                     break;

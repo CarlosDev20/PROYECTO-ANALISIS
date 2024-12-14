@@ -15,6 +15,7 @@ public class VentanaPago extends javax.swing.JFrame {
      */
     public VentanaPago() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

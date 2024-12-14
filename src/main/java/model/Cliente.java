@@ -10,7 +10,12 @@ public class Cliente {
     private String telefono;
     private String contrasena;
 
-    // Constructor
+    // Constructor vacío (útil para frameworks o inicializaciones sin datos previos)
+    public Cliente() {
+        // Constructor vacío
+    }
+
+    // Constructor con todos los campos
     public Cliente(int id, String dni, String nombre, String apellido, String correo, String telefono, String contrasena) {
         this.id = id;
         this.dni = dni;
@@ -21,6 +26,7 @@ public class Cliente {
         this.contrasena = contrasena;
     }
 
+    // Constructor sin id (para registrar nuevos clientes)
     public Cliente(String dni, String nombre, String apellido, String correo, String telefono, String contrasena) {
         this.dni = dni;
         this.nombre = nombre;
@@ -29,8 +35,17 @@ public class Cliente {
         this.telefono = telefono;
         this.contrasena = contrasena;
     }
-    
-    
+
+    // Constructor solo con id (útil para búsquedas o eliminaciones por id)
+    public Cliente(int id) {
+        this.id = id;
+    }
+
+    // Constructor solo con dni (útil para búsquedas rápidas por dni)
+    public Cliente(String dni) {
+        this.dni = dni;
+    }
+
     // Getters y Setters
     public int getId() {
         return id;
